@@ -1,11 +1,14 @@
 from flask import Flask
+from datetime import datetime
 
 app = Flask(__name__)
+
+app_start_time = datetime.utcnow()
 
 
 @app.route("/")
 def index():
-    return "Welcome to My App"
+    return f"Welcome to My App {app_start_time}"
 
 
 if __name__ == "__main__":
