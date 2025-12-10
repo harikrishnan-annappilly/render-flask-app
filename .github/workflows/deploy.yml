@@ -40,28 +40,25 @@ jobs:
           echo "Waiting for deployment $DEPLOY_ID..."
 
           for i in {1..40}; do
-            raw_response=$(curl -s \
-              "https://api.render.com/v1/deploys/$DEPLOY_ID" \
+            deploy_response=$(curl -s \
+              "https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID }}/deploys/$DEPLOY_ID" \
               -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
               -H "Accept: application/json")
 
-            echo "Raw response: $raw_response"
+            echo "Deploy response: $deploy_response"
 
-            status=$(echo "$raw_response" | jq -r '.status' 2>/dev/null || echo "jq_error")
-
-            if [ "$status" = "jq_error" ]; then
-              echo "❌ jq failed to parse response"
-              exit 1
-            fi
+            # Adjust this path depending on the JSON:
+            # if response is {"deploy":{"status":"..."}} use .deploy.status
+            status=$(echo "$deploy_response" | jq -r '.status')
 
             echo "Current status: $status"
 
-            if [ "$status" == "live" ]; then
+            if [ "$status" = "live" ]; then
               echo "✅ Deployment successful!"
               exit 0
             fi
 
-            if [ "$status" == "failed" ]; then
+            if [ "$status" = "failed" ] || [ "$status" = "build_failed" ] || [ "$status" = "update_failed" ]; then
               echo "❌ Deployment failed!"
               exit 1
             fi
