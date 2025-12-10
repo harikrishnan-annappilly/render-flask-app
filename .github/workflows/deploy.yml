@@ -15,12 +15,49 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
       - name: Trigger Render Deployment
+        id: trigger
         run: |
-          curl -X POST \
+          response=$(curl -s -X POST \
             "https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID }}/deploys" \
             -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
-            -H "Accept: application/json"
+            -H "Accept: application/json")
+
+          echo "Response: $response"
+
+          deploy_id=$(echo $response | jq -r '.id')
+
+          if [ "$deploy_id" == "null" ]; then
+            echo "Failed to get deploy ID"
+            exit 1
+          fi
+
+          echo "DEPLOY_ID=$deploy_id" >> $GITHUB_ENV
+
+      - name: Wait for Render Deployment to Complete
+        run: |
+          echo "Waiting for deployment $DEPLOY_ID..."
+
+          for i in {1..40}; do
+            status=$(curl -s \
+              "https://api.render.com/v1/deploys/$DEPLOY_ID" \
+              -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
+              -H "Accept: application/json" | jq -r '.status')
+
+            echo "Current status: $status"
+
+            if [ "$status" == "live" ]; then
+              echo "✅ Deployment successful!"
+              exit 0
+            fi
+
+            if [ "$status" == "failed" ]; then
+              echo "❌ Deployment failed!"
+              exit 1
+            fi
+
+            sleep 10
+          done
+
+          echo "❌ Deployment timed out"
+          exit 1
