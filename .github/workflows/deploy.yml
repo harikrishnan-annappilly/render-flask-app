@@ -9,6 +9,7 @@ on:
       - "**/*.html"
       - "**/*.css"
       - "**/*.js"
+      - "**/*.yml"
 
 jobs:
   deploy:
@@ -39,10 +40,19 @@ jobs:
           echo "Waiting for deployment $DEPLOY_ID..."
 
           for i in {1..40}; do
-            status=$(curl -s \
+            raw_response=$(curl -s \
               "https://api.render.com/v1/deploys/$DEPLOY_ID" \
               -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
-              -H "Accept: application/json" | jq -r '.status')
+              -H "Accept: application/json")
+
+            echo "Raw response: $raw_response"
+
+            status=$(echo "$raw_response" | jq -r '.status' 2>/dev/null || echo "jq_error")
+
+            if [ "$status" = "jq_error" ]; then
+              echo "❌ jq failed to parse response"
+              exit 1
+            fi
 
             echo "Current status: $status"
 
