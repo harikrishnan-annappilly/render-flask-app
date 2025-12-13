@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>User Management - Admin Console</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                        "surface-dark": "#111318",
+                        "surface-highlight": "#282e39",
+                        "text-secondary": "#9da6b9"
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom Scrollbar for modern feel */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #111318; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #282e39; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3a4250; 
+        }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-white antialiased overflow-hidden">
+<div class="flex h-screen w-full">
+<!-- Sidebar -->
+<aside class="hidden lg:flex w-72 flex-col border-r border-surface-highlight bg-surface-dark flex-shrink-0 transition-all duration-300">
+<div class="flex h-full flex-col justify-between p-4">
+<div class="flex flex-col gap-4">
+<!-- User Profile Snippet in Sidebar -->
+<div class="flex gap-3 px-2 py-2 mb-2">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-12 shadow-inner border border-surface-highlight" data-alt="Profile picture of the administrator with a gradient background" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB8XWv9NKKO7YUsC04bpadlik-deMcZ-8WppoX1Z8wCV7ebxEUnWwi28e0H2hdMHO5HKaX0JZktk_KMszc5I_pWG5OPFZAyFxVAlTeGiOUgsMKfQ94_OKLGPYNx5_vUX6088omHXMFegKOqfZqn88K3ccuMjtGXfDDF2rgyZ_JPALp-bHG_PJ-_Qkt033N0av-wEq1rvoFLnhstHS8cFIZ9PZAjEFKk4COVfwo-LOseJa3ZBt4U9koshlbxGLYvFOJ96MazgWh6fnDH");'></div>
+<div class="flex flex-col justify-center">
+<h1 class="text-white text-base font-bold leading-tight">Admin Console</h1>
+<p class="text-text-secondary text-xs font-normal leading-normal">super_admin@company.com</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<div class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-surface-highlight transition-colors group" href="#">
+<span class="material-symbols-outlined text-text-secondary group-hover:text-white">dashboard</span>
+<p class="text-text-secondary group-hover:text-white text-sm font-medium leading-normal">Dashboard</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg bg-primary/20 border border-primary/20" href="#">
+<span class="material-symbols-outlined text-primary font-fill">group</span>
+<p class="text-white text-sm font-bold leading-normal">Users</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-surface-highlight transition-colors group" href="#">
+<span class="material-symbols-outlined text-text-secondary group-hover:text-white">settings</span>
+<p class="text-text-secondary group-hover:text-white text-sm font-medium leading-normal">Settings</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-surface-highlight transition-colors group" href="#">
+<span class="material-symbols-outlined text-text-secondary group-hover:text-white">assignment</span>
+<p class="text-text-secondary group-hover:text-white text-sm font-medium leading-normal">Reports</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-surface-highlight transition-colors group" href="#">
+<span class="material-symbols-outlined text-text-secondary group-hover:text-white">history</span>
+<p class="text-text-secondary group-hover:text-white text-sm font-medium leading-normal">Logs</p>
+</a>
+</div>
+</div>
+<div class="px-3">
+<button class="flex w-full items-center gap-3 px-3 py-3 rounded-lg hover:bg-red-900/20 text-text-secondary hover:text-red-400 transition-colors">
+<span class="material-symbols-outlined">logout</span>
+<p class="text-sm font-medium leading-normal">Sign Out</p>
+</button>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col h-full overflow-hidden relative bg-background-dark">
+<!-- Mobile Header (Visible only on small screens) -->
+<div class="lg:hidden flex items-center justify-between p-4 border-b border-surface-highlight bg-surface-dark">
+<h1 class="text-white text-lg font-bold">Admin Console</h1>
+<button class="text-white">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto w-full">
+<div class="max-w-[1200px] mx-auto p-4 md:p-6 lg:p-10 flex flex-col gap-6">
+<!-- Breadcrumbs -->
+<div class="flex flex-wrap gap-2">
+<a class="text-text-secondary text-sm font-medium leading-normal hover:text-white transition-colors" href="#">Home</a>
+<span class="text-text-secondary text-sm font-medium leading-normal">/</span>
+<span class="text-white text-sm font-medium leading-normal">Users</span>
+</div>
+<!-- Page Heading & Primary Action -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div class="flex flex-col gap-2">
+<h2 class="text-white text-3xl md:text-4xl font-black leading-tight tracking-[-0.033em]">User Management</h2>
+<p class="text-text-secondary text-base font-normal leading-normal">Manage system access, view user details, and update statuses.</p>
+</div>
+<button class="flex shrink-0 items-center justify-center gap-2 rounded-lg h-10 px-5 bg-primary hover:bg-blue-600 text-white text-sm font-bold leading-normal tracking-[0.015em] transition-all shadow-lg shadow-blue-900/20">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span class="truncate">Add User</span>
+</button>
+</div>
+<!-- Toolbar: Search & Filters -->
+<div class="flex flex-col lg:flex-row gap-4 lg:items-center bg-surface-dark p-4 rounded-xl border border-surface-highlight">
+<!-- Search -->
+<div class="flex-1">
+<label class="flex flex-col w-full">
+<div class="flex w-full items-stretch rounded-lg h-10 lg:h-12 bg-surface-highlight focus-within:ring-2 focus-within:ring-primary/50 transition-all">
+<div class="text-text-secondary flex items-center justify-center pl-4 pr-2">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="flex w-full min-w-0 flex-1 bg-transparent text-white focus:outline-0 border-none placeholder:text-text-secondary px-2 text-base font-normal leading-normal" placeholder="Search by username, email or role..."/>
+</div>
+</label>
+</div>
+<!-- Filters -->
+<div class="flex gap-2 overflow-x-auto pb-2 lg:pb-0 scrollbar-hide">
+<button class="flex h-10 lg:h-12 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-surface-highlight hover:bg-[#323945] px-4 transition-colors border border-transparent hover:border-text-secondary/20">
+<p class="text-white text-sm font-medium leading-normal">All Statuses</p>
+<span class="material-symbols-outlined text-white text-[20px]">expand_more</span>
+</button>
+<button class="flex h-10 lg:h-12 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-surface-highlight hover:bg-[#323945] px-4 transition-colors border border-transparent hover:border-text-secondary/20">
+<p class="text-white text-sm font-medium leading-normal">Sort By: Newest</p>
+<span class="material-symbols-outlined text-white text-[20px]">sort</span>
+</button>
+</div>
+</div>
+<!-- Users Table -->
+<div class="w-full overflow-hidden rounded-xl border border-surface-highlight bg-surface-dark shadow-sm">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-surface-highlight bg-surface-highlight/30">
+<th class="px-6 py-4 text-xs font-semibold text-text-secondary uppercase tracking-wider">User</th>
+<th class="px-6 py-4 text-xs font-semibold text-text-secondary uppercase tracking-wider">Role</th>
+<th class="px-6 py-4 text-xs font-semibold text-text-secondary uppercase tracking-wider">Status</th>
+<th class="px-6 py-4 text-xs font-semibold text-text-secondary uppercase tracking-wider">Last Active</th>
+<th class="px-6 py-4 text-xs font-semibold text-text-secondary uppercase tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-highlight">
+<!-- Row 1 -->
+<tr class="group hover:bg-surface-highlight/40 transition-colors">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-cover bg-center" data-alt="Portrait of Sarah Jenkins" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBwIxJX-8KM-WscnU2rRXX4K5SxLxDqjJKIfVs8MAnvhbQDkRIVhmgJ5V1cW2C4sOcBwVqTxnrBPvCUFz878zekUkgYEM8wLcadcIObdPffSHAOcEktraSa_-JzzY-rUNiGoJGU5wLKy-Y5wXraLoYMcYW4UgWvVbDWKQe9u_QcQ_blp9a2Byt8Mh7ffDynZetglNn8YKvqKE1Kn7huLZ771TLABecVx3PZzShoXfArxigAQvKN5P670uDAhJgYNa5q6osqSEfQ7g4X");'></div>
+<div>
+<div class="text-sm font-medium text-white">Sarah Jenkins</div>
+<div class="text-sm text-text-secondary">sarah.j@example.com</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="text-sm text-white">Administrator</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-xs font-medium text-emerald-500 border border-emerald-500/20">
+<span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+                                                Active
+                                            </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">
+                                            2 mins ago
+                                        </td>
+<td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+<button class="text-text-secondary hover:text-red-400 transition-colors inline-flex items-center gap-1 bg-surface-highlight hover:bg-red-900/30 px-3 py-1.5 rounded-md text-xs font-semibold border border-transparent hover:border-red-500/30">
+<span class="material-symbols-outlined text-[16px]">block</span>
+                                                Block
+                                            </button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="group hover:bg-surface-highlight/40 transition-colors">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-cover bg-center" data-alt="Portrait of Michael Chen" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuChlHgzXzPqXNrtTFK77GuoRTZ9CQ1Mbk7X5fJrZclkKOKumExo8DPN_9DBiDLvqpRWRAOzpkL44mE7tXiO743zr_7w7Nf-WZq1Z-PWTvB3N3Z5AHgH4jAT5b1Ur3zlqRaiDjsBwJtxTEA56LI-_NpyFbnO5jJTDqG_A67KTPT0-0f2p3EP4az4nknG-13STyDxHZsUdEm5hmoDSMs9vH6YB7LpYe5wT_vcpQROeWF2bK3Q4ktdYHZr5zoZNKihQ925BVi7LOZZSipH");'></div>
+<div>
+<div class="text-sm font-medium text-white">Michael Chen</div>
+<div class="text-sm text-text-secondary">m.chen@example.com</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="text-sm text-white">Editor</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-xs font-medium text-emerald-500 border border-emerald-500/20">
+<span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+                                                Active
+                                            </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">
+                                            4 hours ago
+                                        </td>
+<td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+<button class="text-text-secondary hover:text-red-400 transition-colors inline-flex items-center gap-1 bg-surface-highlight hover:bg-red-900/30 px-3 py-1.5 rounded-md text-xs font-semibold border border-transparent hover:border-red-500/30">
+<span class="material-symbols-outlined text-[16px]">block</span>
+                                                Block
+                                            </button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="group hover:bg-surface-highlight/40 transition-colors bg-red-900/5">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-cover bg-center grayscale opacity-70" data-alt="Portrait of David Miller" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCfVUNkWVqesNgi9zQFUp3HK08zOB5AZjEgMzPHH6KZNkFJBUeVrGnFBeJ9k2UAWkVEkd7jte1TuUfLfmWyIsTyWgdomtjG6-0czNrLkAiku02prDNwiXLjm1idl0AZHa2Jxsi8z_WF0LiW3rAxc_c9SCTYKTECNhSE3ye-lIQ36w6Uk8U8A_l76URSlpjQB19Aj2FvztCqZ_ha5Tx4fz2DRC9dUOfl2Avc15-zWxN-LcBX9muHxmsvtq9TvLNGsSlgdprAGbeYUzAp");'></div>
+<div>
+<div class="text-sm font-medium text-text-secondary line-through decoration-slate-500">David Miller</div>
+<div class="text-sm text-text-secondary">david.m@example.com</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="text-sm text-text-secondary">Viewer</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 rounded-full bg-red-500/10 px-2.5 py-0.5 text-xs font-medium text-red-500 border border-red-500/20">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+                                                Blocked
+                                            </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">
+                                            2 weeks ago
+                                        </td>
+<td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+<button class="text-white hover:text-white transition-colors inline-flex items-center gap-1 bg-primary hover:bg-blue-600 px-3 py-1.5 rounded-md text-xs font-semibold shadow-lg shadow-blue-900/20">
+<span class="material-symbols-outlined text-[16px]">lock_open</span>
+                                                Unblock
+                                            </button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="group hover:bg-surface-highlight/40 transition-colors">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-cover bg-center" data-alt="Portrait of Emily Davis" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBODjyq5UOoy5HgrsjmJgCa3eDos2xBfUmQBIGPrhKonasnAlUsNCa6FlSUi_0W_ulflpl5vVSvYddy9YWjX-1OEl-zYvlsvGFOXXQ799keq4BiPkgorEJvhnzm1d9Y3NLp1ZAf3C-UKEGZOzk5EDXZSW70gAC-T_WNtXCWnFPEmOA4PtVrxM3k8DQlWlZLHc-NEDOcMnUEpx7Oqrn0oPbEuuQsi9fhekbILZXiXV_mu58jTL7zvH_KYhpqUsC5aw0QYO6Eo4WMRkv3");'></div>
+<div>
+<div class="text-sm font-medium text-white">Emily Davis</div>
+<div class="text-sm text-text-secondary">emily.d@example.com</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="text-sm text-white">Editor</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-xs font-medium text-emerald-500 border border-emerald-500/20">
+<span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+                                                Active
+                                            </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">
+                                            1 day ago
+                                        </td>
+<td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+<button class="text-text-secondary hover:text-red-400 transition-colors inline-flex items-center gap-1 bg-surface-highlight hover:bg-red-900/30 px-3 py-1.5 rounded-md text-xs font-semibold border border-transparent hover:border-red-500/30">
+<span class="material-symbols-outlined text-[16px]">block</span>
+                                                Block
+                                            </button>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="group hover:bg-surface-highlight/40 transition-colors">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-cover bg-center" data-alt="Portrait of James Wilson" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC1z4C7zUGbwSK-_z_d7dBmxkbNiFzjr5tm-kjQr6qF9M8k_K_1DFWJqa6ZkIA33OkZ09Z1NOouibwetbu--ppX4W0nhg_8KAsIpbRt0sYgIfscxzAInn3b0LphMmtPsT4hxakI5Ivuk2_IxhZrFuOpdyUcT-f2EQIO53ReaCeO6ygg9EhqEWZ_apB3c86yLtYzitNJgicQ7cf_yxelCtDt56OYyVpLMpYv5oNwU1O8-cm9vafL8iTx_KwxU_S3YkMqDQGcQKcfORVC");'></div>
+<div>
+<div class="text-sm font-medium text-white">James Wilson</div>
+<div class="text-sm text-text-secondary">j.wilson@example.com</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="text-sm text-white">Viewer</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-xs font-medium text-emerald-500 border border-emerald-500/20">
+<span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+                                                Active
+                                            </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">
+                                            3 days ago
+                                        </td>
+<td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+<button class="text-text-secondary hover:text-red-400 transition-colors inline-flex items-center gap-1 bg-surface-highlight hover:bg-red-900/30 px-3 py-1.5 rounded-md text-xs font-semibold border border-transparent hover:border-red-500/30">
+<span class="material-symbols-outlined text-[16px]">block</span>
+                                                Block
+                                            </button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="flex items-center justify-between border-t border-surface-highlight px-4 py-3 sm:px-6">
+<div class="flex flex-1 justify-between sm:hidden">
+<a class="relative inline-flex items-center rounded-md border border-surface-highlight bg-surface-dark px-4 py-2 text-sm font-medium text-text-secondary hover:bg-surface-highlight hover:text-white" href="#">Previous</a>
+<a class="relative ml-3 inline-flex items-center rounded-md border border-surface-highlight bg-surface-dark px-4 py-2 text-sm font-medium text-text-secondary hover:bg-surface-highlight hover:text-white" href="#">Next</a>
+</div>
+<div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+<div>
+<p class="text-sm text-text-secondary">
+                                        Showing
+                                        <span class="font-medium text-white">1</span>
+                                        to
+                                        <span class="font-medium text-white">10</span>
+                                        of
+                                        <span class="font-medium text-white">97</span>
+                                        results
+                                    </p>
+</div>
+<div>
+<nav aria-label="Pagination" class="isolate inline-flex -space-x-px rounded-md shadow-sm">
+<a class="relative inline-flex items-center rounded-l-md px-2 py-2 text-text-secondary ring-1 ring-inset ring-surface-highlight hover:bg-surface-highlight focus:z-20 focus:outline-offset-0" href="#">
+<span class="sr-only">Previous</span>
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</a>
+<!-- Current: "z-10 bg-primary text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary", Default: "text-text-secondary ring-1 ring-inset ring-surface-highlight hover:bg-surface-highlight focus:outline-offset-0" -->
+<a aria-current="page" class="relative z-10 inline-flex items-center bg-primary px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary" href="#">1</a>
+<a class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-text-secondary ring-1 ring-inset ring-surface-highlight hover:bg-surface-highlight focus:z-20 focus:outline-offset-0" href="#">2</a>
+<a class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-text-secondary ring-1 ring-inset ring-surface-highlight hover:bg-surface-highlight focus:z-20 focus:outline-offset-0" href="#">3</a>
+<span class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-text-secondary ring-1 ring-inset ring-surface-highlight focus:outline-offset-0">...</span>
+<a class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-text-secondary ring-1 ring-inset ring-surface-highlight hover:bg-surface-highlight focus:z-20 focus:outline-offset-0" href="#">8</a>
+<a class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-text-secondary ring-1 ring-inset ring-surface-highlight hover:bg-surface-highlight focus:z-20 focus:outline-offset-0" href="#">9</a>
+<a class="relative inline-flex items-center rounded-r-md px-2 py-2 text-text-secondary ring-1 ring-inset ring-surface-highlight hover:bg-surface-highlight focus:z-20 focus:outline-offset-0" href="#">
+<span class="sr-only">Next</span>
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</a>
+</nav>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

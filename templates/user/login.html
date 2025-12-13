@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin Login - Modern Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white min-h-screen flex flex-col antialiased">
+<!-- Top Navigation (Simplified for Login Context) -->
+<header class="w-full flex items-center justify-between border-b border-[#e5e7eb] dark:border-[#282e39] px-6 py-4 bg-white dark:bg-[#111318]">
+<div class="flex items-center gap-3">
+<div class="size-8 flex items-center justify-center text-primary dark:text-white">
+<span class="material-symbols-outlined text-3xl">admin_panel_settings</span>
+</div>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold tracking-tight">Admin Portal</h2>
+</div>
+<div>
+<a class="text-sm font-medium text-slate-600 dark:text-[#9da6b9] hover:text-primary transition-colors" href="#">Help &amp; Support</a>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 flex items-center justify-center p-4 sm:p-8">
+<div class="w-full max-w-[480px] bg-white dark:bg-[#1c1f27] rounded-xl shadow-lg border border-[#e5e7eb] dark:border-[#3b4354] overflow-hidden">
+<!-- Page Heading Component -->
+<div class="p-8 pb-4">
+<div class="flex flex-col gap-2 text-center sm:text-left">
+<h1 class="text-slate-900 dark:text-white text-3xl font-black leading-tight tracking-[-0.033em]">Welcome Back</h1>
+<p class="text-slate-500 dark:text-[#9da6b9] text-base font-normal">Please enter your details to sign in.</p>
+</div>
+</div>
+<!-- Form Section -->
+<form class="p-8 pt-2 flex flex-col gap-5">
+<!-- TextField: Email -->
+<div class="flex flex-col gap-2">
+<label class="text-slate-900 dark:text-white text-sm font-semibold leading-normal">
+                        Email Address
+                    </label>
+<div class="relative">
+<input class="form-input w-full rounded-lg border border-slate-300 dark:border-[#3b4354] bg-slate-50 dark:bg-[#111318] px-4 py-3 text-base text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-[#9da6b9] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" placeholder="name@company.com" type="email"/>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-[#9da6b9] pointer-events-none">mail</span>
+</div>
+</div>
+<!-- TextField: Password -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<label class="text-slate-900 dark:text-white text-sm font-semibold leading-normal">
+                            Password
+                        </label>
+</div>
+<div class="relative">
+<input class="form-input w-full rounded-lg border border-slate-300 dark:border-[#3b4354] bg-slate-50 dark:bg-[#111318] px-4 py-3 text-base text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-[#9da6b9] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" placeholder="Enter your password" type="password"/>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-[#9da6b9] cursor-pointer hover:text-slate-600 dark:hover:text-white transition-colors">visibility_off</span>
+</div>
+</div>
+<!-- Remember Me & Forgot Password Row -->
+<div class="flex items-center justify-between">
+<label class="flex items-center gap-2 cursor-pointer group">
+<input class="rounded border-slate-300 dark:border-[#3b4354] text-primary focus:ring-primary dark:bg-[#111318] cursor-pointer" type="checkbox"/>
+<span class="text-sm font-medium text-slate-600 dark:text-[#9da6b9] group-hover:text-slate-900 dark:group-hover:text-white transition-colors">Remember me</span>
+</label>
+<a class="text-sm font-bold text-primary hover:text-blue-400 transition-colors" href="#">Forgot Password?</a>
+</div>
+<!-- Submit Button -->
+<button class="w-full flex items-center justify-center gap-2 rounded-lg bg-primary hover:bg-blue-600 px-6 py-3.5 text-white text-sm font-bold shadow-md shadow-blue-500/20 transition-all active:scale-[0.98]" type="submit">
+<span>Sign In</span>
+<span class="material-symbols-outlined text-[20px]">login</span>
+</button>
+</form>
+<!-- Action Panel / Footer -->
+<div class="px-8 pb-8">
+<div class="w-full h-px bg-slate-200 dark:bg-[#282e39] mb-6"></div>
+<div class="flex flex-col items-center justify-center gap-2">
+<p class="text-slate-500 dark:text-[#9da6b9] text-sm">Don't have an account?</p>
+<a class="inline-flex items-center gap-2 text-sm font-bold text-slate-900 dark:text-white hover:text-primary dark:hover:text-primary transition-colors group" href="#">
+                        Register for access
+                        <span class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</main>
+<!-- Background Decoration (Optional for modern feel) -->
+<div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+<div class="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-primary/5 blur-[120px]"></div>
+<div class="absolute top-[40%] -right-[10%] w-[40%] h-[40%] rounded-full bg-primary/10 blur-[120px]"></div>
+</div>
+</body></html>
